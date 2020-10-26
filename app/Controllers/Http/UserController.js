@@ -1,8 +1,9 @@
 'use strict'
+const User = use('App/Models/User')
 
 class UserController {
 
-    async getProfile({requset,auth,response}){
+    async getProfile({request,auth,response}){
         try{
             return await auth.getUser()
         }
@@ -10,11 +11,23 @@ class UserController {
             response.send('You are not logged in')
         }
     }
-    async  editProfile({requset,auth,response}) {
-        const user = await User.update(request.all())
+    async  editProfile({request,auth,response}) {
+        try{
+        const info = await auth.getUser()
+        console.log(request.body.fullname);
+        const user = await User.query().where('id', info.id).update({
+            fullname: request.body.fullname,
+            username:request.body.username,
+            email:request.body.email, 
+            address:request.body.address,
+        })
         return response.json(user)
     }
-    }
+    catch (error){
+        response.send('Can not edit')
+    } 
+ }
+}
 
 
 module.exports = UserController

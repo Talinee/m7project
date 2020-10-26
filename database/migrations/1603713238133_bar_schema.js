@@ -7,7 +7,8 @@ class BarSchema extends Schema {
   up () {
     this.create('bars', (table) => {
       table.increments()
-      table.string('tableNo',).notNullable()
+      table.string('storeName').notNullable()
+      table.string('tableNo').notNullable()
       table.string('orderNo').notNullable()
       table.string('orderPrice').notNullable()
       table.string('discount').notNullable()
