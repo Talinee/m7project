@@ -16,6 +16,8 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.post('/register','AuthController.register')
+Route.post('/login','AuthController.login')
+Route.post('/login/facebook','AuthController.loginFacebook')
+Route.get('/profile','UserController.getProfile')
+Route.post('/editprofile','UserController.editProfile')
