@@ -12,6 +12,7 @@ class AuthController {
     }
 
     //* login *//
+
     async login ({request,auth,response}) {
         try{
         const email = request.input('email')
@@ -31,6 +32,8 @@ class AuthController {
             console.log(error)
         }
     }
+
+    //* Facebook login //
     async loginFacebook ({request,auth,response}){
         try {
             const fbToken = request.input('token')

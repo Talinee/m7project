@@ -1,16 +1,16 @@
 'use strict'
 
 const { test } = use('Test/Suite')('Login')
-const Auth = require('../../app/Controllers/Http/AuthController')
 
-test('case01: Login success', async ({ assert }) => {
-  
-  // test data
-  const result = await Auth({
-    "email":"test@email.com",
-    "password":"1234"
+test('that user/profile route can be access', async ({ client }) => {
+  const user  = await User.create({
+      email: 'test@email.com'
   })
 
-  // assert
-  assert.equal(result, )
+  const response = await client
+    .get('user/profile')
+    .loginVia(user, 'jwt')
+    .end()
+
+  response.assertStatus(200)
 })
